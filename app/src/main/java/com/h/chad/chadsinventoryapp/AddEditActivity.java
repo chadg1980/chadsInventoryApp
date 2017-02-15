@@ -32,6 +32,7 @@ public class AddEditActivity extends AppCompatActivity
     private EditText mNameEditText;
     private EditText mDescriptionEditText;
     private EditText mPriceEditText;
+    private EditText mQuantityEditText;
     private Uri mCurrentProductUri;
     private static final int EXISTING_PRODUCT_LOADER = 0;
 
@@ -56,6 +57,7 @@ public class AddEditActivity extends AppCompatActivity
         mNameEditText = (EditText) findViewById(R.id.edit_text_name);
         mDescriptionEditText = (EditText) findViewById(R.id.edit_text_description);
         mPriceEditText = (EditText) findViewById(R.id.edit_text_price);
+        mQuantityEditText = (EditText)findViewById(R.id.edit_text_quantity);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -107,12 +109,23 @@ public class AddEditActivity extends AppCompatActivity
         //DUMMY DATA FOR QUANTITY
         values.put(ProductEntry.PRODUCT_QUANTITY, 0);
         values.put(ProductEntry.PRODUCT_SUPPLIER, 1);
-
-        Uri newUri = getContentResolver().insert(ProductContract.ProductEntry.CONTENT_URI, values);
-        if(newUri == null){
-            Toast.makeText(this, "Failure inserting product", Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(this, "success inserting product", Toast.LENGTH_SHORT).show();
+        //if mCurrentProductUri is null, we are adding a new product
+        if(mCurrentProductUri == null) {
+            Uri newUri = getContentResolver().insert(ProductContract.ProductEntry.CONTENT_URI, values);
+            if (newUri == null) {
+                Toast.makeText(this, "Failure inserting product", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "success inserting product", Toast.LENGTH_SHORT).show();
+            }
+        }
+        //if mCurrentProductUri is not null
+        else{
+            int rowsAffected = getContentResolver().update(mCurrentProductUri, values, null, null);
+            if (rowsAffected == 0) {
+                Toast.makeText(this, "Failure updating product", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "success updating product", Toast.LENGTH_SHORT).show();
+            }
         }
 
 
@@ -144,14 +157,19 @@ public class AddEditActivity extends AppCompatActivity
         if(cursor.moveToFirst()) {
             int nameColumnIndex = cursor.getColumnIndex(ProductEntry.PRODUCT_NAME);
             int descriptionColumnIndex = cursor.getColumnIndex(ProductEntry.PRODUCT_DESCRIPTION);
+            int priceColumnIndex = cursor.getColumnIndex(ProductEntry.PRODUCT_PRICE);
+            int quantityColumnIndex = cursor.getColumnIndex(ProductEntry.PRODUCT_QUANTITY);
 
             String name = cursor.getString(nameColumnIndex);
             String description = cursor.getString(descriptionColumnIndex);
+            int price = cursor.getInt(priceColumnIndex);
+            int quantity = cursor.getInt(quantityColumnIndex);
 
             mNameEditText.setText(name);
             mDescriptionEditText.setText(description);
+            mPriceEditText.setText(Integer.toString(price));
+            mQuantityEditText.setText(Integer.toString(quantity));
         }
-
     }
 
     @Override
