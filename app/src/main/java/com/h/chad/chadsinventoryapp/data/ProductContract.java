@@ -1,6 +1,9 @@
 package com.h.chad.chadsinventoryapp.data;
 
+import android.content.ContentResolver;
+import android.net.Uri;
 import android.provider.BaseColumns;
+
 
 /**
  * Created by chad on 2/14/2017.
@@ -10,6 +13,10 @@ import android.provider.BaseColumns;
 public class ProductContract {
     //To prevent someone from accidentally createing the ProductContrct class
     private ProductContract(){}
+
+    public final static String CONTENT_AUTHORITY = "com.h.chad.chadsinventoryapp";
+    public final static Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    public final static String PATH_PRODUCTS = "products";
 
     /**
      * Inner class that defines the values for the database table
@@ -22,6 +29,9 @@ public class ProductContract {
      *   -supplier  INTEGER
      */
     public final static class ProductEntry implements BaseColumns{
+
+        public final static Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_PRODUCTS);
+
         //name of the table
         public final static String TABLE_NAME = "products";
         //ID of each product    TYPE: INTEGER
@@ -48,6 +58,12 @@ public class ProductContract {
         public static final int COFFEE_HUT = 0;
         public static final int BEAN_BARN = 1;
         public static final int SOUTH_AMERICA_FARMER = 2;
+
+        //Return values for getType in ProductProvider
+        public static final String CONTENT_LIST_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE +
+                "/" + CONTENT_AUTHORITY + "/" + PATH_PRODUCTS;
+        public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE +
+                "/" + CONTENT_AUTHORITY + "/" + PATH_PRODUCTS;
 
     }
 

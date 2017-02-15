@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ChadsInventoryApp</string>
+    <string name="product_name_label">Product Name:</string>
+    <string name="product_description_label">Product Description:</string>
+    <string name="product_price_label">Unit Price:</string>
+    <string name="product_quantiry_label">Quantity in Stock:</string>
+    <string name="menu_action_save">Save</string>
+    <string name="menu_action_delete">Delete</string>
 </resources>

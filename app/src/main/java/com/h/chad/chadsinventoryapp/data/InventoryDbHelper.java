@@ -25,7 +25,6 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
     private final static String DATABASE_NAME = "chadsCoffee.db";
     //Database version
     private final static int DATABASE_VERSION = 1;
-
     /**
      * Constructor
      * @param context of the app
@@ -47,17 +46,16 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //Create a String that contains the SQL statement to create the pet table
         String SQL_CREATE_PRODUCTS_TABLE =
-                "CREATE_TABLE " + ProductEntry.TABLE_NAME +"( "          +
-                ProductEntry._ID + "INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                ProductEntry.PRODUCT_NAME + "TEXT NOT NULL, "            +
-                ProductEntry.PRODUCT_DESCRIPTION +"TEXT, "               +
-                ProductEntry.PRODUCT_PRICE + "INTEGER NOT NULL DEFAULT 99999, "        +
-                ProductEntry.PRODUCT_QUANTITY +"INTEGER NOT NULL, "      +
-                ProductEntry.PRODUCT_PHOTO + "BLOB, "                    +
-                ProductEntry.PRODUCT_SUPPLIER + "INTEGER NOT NULL, ";
+                "CREATE TABLE " + ProductEntry.TABLE_NAME +"( "          +
+                ProductEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                ProductEntry.PRODUCT_NAME + " TEXT NOT NULL, "            +
+                ProductEntry.PRODUCT_DESCRIPTION +" TEXT, "               +
+                ProductEntry.PRODUCT_PRICE + " INTEGER NOT NULL DEFAULT 9999999, "        +
+                ProductEntry.PRODUCT_QUANTITY +" INTEGER NOT NULL, "      +
+                ProductEntry.PRODUCT_PHOTO + " BLOB, "                    +
+                ProductEntry.PRODUCT_SUPPLIER + " INTEGER);";
         db.execSQL(SQL_CREATE_PRODUCTS_TABLE);
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         //The database is on Version 1
