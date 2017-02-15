@@ -1,6 +1,10 @@
 package com.h.chad.chadsinventoryapp;
 
+import android.app.LoaderManager;
 import android.content.ContentValues;
+import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,15 +26,32 @@ import static android.R.attr.name;
  * or edit an existing product
  */
 
-public class AddEditActivity extends AppCompatActivity{
+public class AddEditActivity extends AppCompatActivity
+    implements LoaderManager.LoaderCallbacks<Cursor>{
     private final static String LOG_TAG = AddEditActivity.class.getName();
     private EditText mNameEditText;
     private EditText mDescriptionEditText;
     private EditText mPriceEditText;
+    private Uri mCurrentProductUri;
+    private static final int EXISTING_PRODUCT_LOADER = 0;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit);
+
+        //get the intent and get the data
+        //to get the associated URI and determine
+        //If this is a new product or the product is being edited
+        Intent intent = getIntent();
+        mCurrentProductUri = intent.getData();
+
+        if(mCurrentProductUri == null){
+            setTitle("Add a Product");
+        }
+        else {
+            setTitle("Edit product");
+            getLoaderManager().initLoader(EXISTING_PRODUCT_LOADER, null, this);
+        }
 
         mNameEditText = (EditText) findViewById(R.id.edit_text_name);
         mDescriptionEditText = (EditText) findViewById(R.id.edit_text_description);
@@ -97,4 +118,47 @@ public class AddEditActivity extends AppCompatActivity{
 
     }
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int thisId, Bundle args) {
+        String projection [] = {
+                ProductEntry._ID,
+                ProductEntry.PRODUCT_NAME,
+                ProductEntry.PRODUCT_DESCRIPTION,
+                ProductEntry.PRODUCT_QUANTITY,
+                ProductEntry.PRODUCT_PRICE
+        };
+        return new android.content.CursorLoader(
+                this,
+                mCurrentProductUri,
+                projection,
+                null,
+                null,
+                null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        if(cursor == null || cursor.getCount() < 1){
+            return;
+        }
+        if(cursor.moveToFirst()) {
+            int nameColumnIndex = cursor.getColumnIndex(ProductEntry.PRODUCT_NAME);
+            int descriptionColumnIndex = cursor.getColumnIndex(ProductEntry.PRODUCT_DESCRIPTION);
+
+            String name = cursor.getString(nameColumnIndex);
+            String description = cursor.getString(descriptionColumnIndex);
+
+            mNameEditText.setText(name);
+            mDescriptionEditText.setText(description);
+        }
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mNameEditText.setText("");
+        mDescriptionEditText.setText("");
+        mPriceEditText.setText("");
+
+    }
 }
