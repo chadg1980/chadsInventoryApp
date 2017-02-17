@@ -42,7 +42,7 @@ public class AddEditActivity extends AppCompatActivity
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_edit);
+        setContentView(R.layout.detail_layout);
 
         //get the intent and get the data
         //to get the associated URI and determine

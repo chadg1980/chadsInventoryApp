@@ -2,6 +2,7 @@ package com.h.chad.chadsinventoryapp;
 
 import android.app.LoaderManager;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -11,8 +12,10 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView;
 
@@ -21,6 +24,7 @@ import com.h.chad.chadsinventoryapp.data.ProductContract.ProductEntry;
 
 import java.util.List;
 import static android.R.attr.id;
+import static com.h.chad.chadsinventoryapp.R.id.fab;
 
 
 public class MainActivity extends AppCompatActivity
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity
     private static final String LOG_TAG = MainActivity.class.getName();
     private static final int URL_LOADER = 0;
     private ProductCursorAdapter mProductCursorAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

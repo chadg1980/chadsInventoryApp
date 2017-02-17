@@ -1,6 +1,7 @@
 package com.h.chad.chadsinventoryapp.data;
 
 import android.content.ContentProvider;
+
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
