@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.h.chad.chadsinventoryapp.data.ProductContract;
 import com.h.chad.chadsinventoryapp.data.ProductContract.ProductEntry;
 
+import org.w3c.dom.Text;
+
 import static android.R.attr.name;
 
 /**
@@ -34,17 +36,25 @@ public class ProductCursorAdapter extends CursorAdapter {
         //get the textviews from the list_item
         TextView tvName = (TextView) view.findViewById(R.id.productName);
         TextView tvDescription = (TextView) view.findViewById(R.id.productDesctiption);
+        TextView tvQuantity = (TextView) view.findViewById(R.id.quantity);
+        TextView tvPrice = (TextView)view.findViewById(R.id.price);
 
         //get the column index for each item
         int nameColumnIndex = cursor.getColumnIndex(ProductEntry.PRODUCT_NAME);
         int descriptionColumnIndex = cursor.getColumnIndex(ProductEntry.PRODUCT_DESCRIPTION);
+        int quantityColumnIndex = cursor.getColumnIndex(ProductEntry.PRODUCT_QUANTITY);
+        int saleColumnIndex = cursor.getColumnIndex(ProductEntry.PRODUCT_PRICE);
 
         //get the data from the database at that column
         String nameString = cursor.getString(nameColumnIndex);
         String descriptionString = cursor.getString(descriptionColumnIndex);
+        int quantityInt = cursor.getInt(quantityColumnIndex);
+        int saleInt = cursor.getInt(saleColumnIndex);
 
         //set the text
         tvName.setText(nameString);
         tvDescription.setText(descriptionString);
+        tvQuantity.setText(Integer.toString(quantityInt));
+        tvPrice.setText(Integer.toString(saleInt));
     }
 }

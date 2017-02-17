@@ -6,4 +6,10 @@
     <string name="product_quantiry_label">Quantity in Stock:</string>
     <string name="menu_action_save">Save</string>
     <string name="menu_action_delete">Delete</string>
+    <string name="confirm_delete_message">Delete this product?</string>
+    <string name="confirm_positive_delete">delete</string>
+    <string name="confirm_negative_delete">cancel</string>
+    <string name="list_quantity_label">QTY:</string>
+    <string name="list_price_label">Price:</string>
+    <string name="list_sale_button_label">Sale</string>
 </resources>

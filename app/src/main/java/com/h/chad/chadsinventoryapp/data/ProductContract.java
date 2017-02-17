@@ -21,12 +21,13 @@ public class ProductContract {
     /**
      * Inner class that defines the values for the database table
      * Table: products
-     *   -_ID       INTEGER
-     *   -name      TEXT
-     *   -price     INTEGER
-     *   -quantity  INTEGER
-     *   -photo     BLOB
-     *   -supplier  INTEGER
+     *   -_ID           INTEGER
+     *   -name          TEXT
+     *   -description   TEXT
+     *   -price         INTEGER
+     *   -quantity      INTEGER
+     *   -photo         BLOB
+     *   -supplier      INTEGER
      */
     public final static class ProductEntry implements BaseColumns{
 

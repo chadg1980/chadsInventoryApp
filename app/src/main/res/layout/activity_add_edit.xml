@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
 
 
     <!-- product Name -->
@@ -11,75 +11,94 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
+            style="@style/AddProductLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/product_name_label"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="@string/product_name_label" />
+
         <EditText
             android:id="@+id/edit_text_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Name"
-            />
+            android:textColor="@color/textWhite"
+            android:textColorHint="@color/textWhite" />
         <!-- product Description -->
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
+            style="@style/AddProductLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/product_description_label"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:minLines="2"
+            android:text="@string/product_description_label" />
+
         <EditText
             android:id="@+id/edit_text_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:lines="4"
-            android:inputType="text"
             android:hint="descrition"
-            />
+            android:inputType="text"
+            android:minLines="2"
+            android:maxLines="3"
+            android:textColor="@color/textWhite"
+            android:textColorHint="@color/textWhite" />
     </LinearLayout>
     <!-- price -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
+            style="@style/AddProductLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/product_price_label"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="@string/product_price_label" />
+
         <EditText
             android:id="@+id/edit_text_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:inputType="numberDecimal"
             android:hint="price"
-            />
+            android:inputType="numberDecimal"
+            android:textColor="@color/textWhite"
+            android:textColorHint="@color/textWhite" />
     </LinearLayout>
     <!-- Current Quantity -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
+            style="@style/AddProductLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/product_quantiry_label"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="@string/product_quantiry_label" />
+
         <EditText
             android:id="@+id/edit_text_quantity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:inputType="number"
             android:hint="0"
-            />
+            android:inputType="number"
+            android:textColor="@color/textWhite"
+            android:textColorHint="@color/textWhite" />
     </LinearLayout>
 </LinearLayout>

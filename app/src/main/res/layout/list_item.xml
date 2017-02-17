@@ -1,19 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants">
 
+    <!-- Name of the product -->
     <TextView
         android:id="@+id/productName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/headers"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="10dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+
         />
+
+    <!-- Description of the product -->
     <TextView
         android:id="@+id/productDesctiption"
+        style="@style/data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"/>
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/productName"
+        android:maxWidth="150dp"
+        android:minLines="3"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
 
-</LinearLayout>
+    <!-- Price & Price Label -->
+    <TextView
+        android:id="@+id/price_label"
+        style="@style/headers"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/quantity_Label"
+        android:paddingRight="15dp"
+        android:text="@string/list_price_label" />
+
+    <TextView
+        android:id="@+id/price"
+        style="@style/data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/price_label"
+        android:layout_toLeftOf="@+id/quantity"
+        android:paddingRight="15dp" />
+
+    <!-- Quantity and Quantity Label-->
+    <TextView
+        android:id="@+id/quantity_Label"
+        style="@style/headers"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/sale"
+        android:paddingRight="10dp"
+        android:text="@string/list_quantity_label" />
+
+    <TextView
+        android:id="@+id/quantity"
+        style="@style/data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/quantity_Label"
+        android:layout_toLeftOf="@+id/sale"
+        android:paddingRight="10dp" />
+
+    <!-- Button for a sale -->
+    <Button
+        android:id="@+id/sale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:paddingRight="10dp"
+        android:text="@string/list_sale_button_label" />
+</RelativeLayout>
