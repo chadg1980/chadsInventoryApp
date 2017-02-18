@@ -50,8 +50,8 @@
             android:layout_weight="1"
             android:hint="descrition"
             android:inputType="text"
-            android:minLines="2"
             android:maxLines="3"
+            android:minLines="2"
             android:textColor="@color/textWhite"
             android:textColorHint="@color/textWhite" />
     </LinearLayout>
@@ -101,4 +101,93 @@
             android:textColor="@color/textWhite"
             android:textColorHint="@color/textWhite" />
     </LinearLayout>
+    <!-- Select a Supplier -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AddProductLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/add_edit_supplier" />
+
+        <Spinner
+            android:id="@+id/edit_supplier_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:spinnerMode="dropdown"
+            style="@style/spinnerStyle"
+             />
+    </LinearLayout>
+
+    <!-- Sale or shipment button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/detail_sale"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/list_sale_button_label"
+            />
+
+        <Button
+            android:id="@+id/detail_shipment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/shipment_button"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AddProductLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/order_label" />
+
+        <Button
+            android:id="@+id/order_from_supplier"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/supplier_button"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/AddProductLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/supplier_details_label" />
+
+        <TextView
+            android:id="@+id/supplier_details"
+            style="@style/AddProductLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            />
+    </LinearLayout>
+
 </LinearLayout>

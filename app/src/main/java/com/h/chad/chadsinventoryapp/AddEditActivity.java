@@ -14,11 +14,18 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.h.chad.chadsinventoryapp.data.ProductContract;
 import com.h.chad.chadsinventoryapp.data.ProductContract.ProductEntry;
+
+import org.w3c.dom.Text;
 
 import static android.R.attr.dial;
 import static android.R.attr.id;
@@ -32,13 +39,17 @@ import static android.R.attr.name;
 
 public class AddEditActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<Cursor> {
+
     private final static String LOG_TAG = AddEditActivity.class.getName();
     private EditText mNameEditText;
     private EditText mDescriptionEditText;
     private EditText mPriceEditText;
     private EditText mQuantityEditText;
     private Uri mCurrentProductUri;
+    private Spinner mSupplierSpinner;
     private static final int EXISTING_PRODUCT_LOADER = 0;
+    private int mSupplier = ProductEntry.NO_SUPPLIER;
+    private TextView mSupplierDetails;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +72,52 @@ public class AddEditActivity extends AppCompatActivity
         mDescriptionEditText = (EditText) findViewById(R.id.edit_text_description);
         mPriceEditText = (EditText) findViewById(R.id.edit_text_price);
         mQuantityEditText = (EditText) findViewById(R.id.edit_text_quantity);
+        mSupplierDetails = (TextView)findViewById(R.id.supplier_details);
+        mSupplierSpinner = (Spinner) findViewById(R.id.edit_supplier_spinner);
+        setupSpinner();
     }
 
+    private void setupSpinner() {
+        mSupplier = ProductEntry.NO_SUPPLIER;
+        //Create an adapter for the spinner.
+        //The list of options are from the String array it will use the default layout
+        ArrayAdapter suppllierAdapter = ArrayAdapter.createFromResource(
+                this, R.array.supplier_options, android.R.layout.simple_spinner_item);
+        //Specify dropdown layout style - simple list view with 1 item per line
+        suppllierAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+
+        //Apply the adapter to the spinner
+        mSupplierSpinner.setAdapter(suppllierAdapter);
+
+        //Set the integer to the constant in ProductContract
+        mSupplierSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                String selection = (String) adapterView.getItemAtPosition(pos);
+                if (!TextUtils.isEmpty(selection)){
+                    if(selection.equals(getString(R.string.coffee_hut))){
+                        mSupplier = ProductEntry.COFFEE_HUT;
+                        mSupplierDetails.setText(R.string.coffee_hut_details);
+                    }else if(selection.equals(getString(R.string.bean_barn))){
+                        mSupplier = ProductEntry.BEAN_BARN;
+                        mSupplierDetails.setText(R.string.bean_barn_details);
+                    }else if(selection.equals(getString(R.string.farm_direct))){
+                        mSupplier = ProductEntry.FARM_DIRECT;
+                        mSupplierDetails.setText(R.string.farm_direct_details);
+                    }else{
+                        mSupplier = ProductEntry.NO_SUPPLIER;
+                        mSupplierDetails.setText(R.string.no_supplier);
+                    }
+                    //mSupplier = 0;
+                }
+            }
+            //Because AdapterView is an abstract class, onNothingSelected must be defined.
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                mSupplier = ProductEntry.NO_SUPPLIER;
+            }
+        });
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_add_edit, menu);
@@ -164,7 +219,7 @@ public class AddEditActivity extends AppCompatActivity
         values.put(ProductContract.ProductEntry.PRODUCT_DESCRIPTION, descriptionString);
         values.put(ProductContract.ProductEntry.PRODUCT_PRICE, Integer.parseInt(priceString));
 
-        values.put(ProductEntry.PRODUCT_SUPPLIER, 1);
+        values.put(ProductEntry.PRODUCT_SUPPLIER, mSupplier);
         //if mCurrentProductUri is null, we are adding a new product
         if (mCurrentProductUri == null) {
             Uri newUri = getContentResolver().insert(ProductContract.ProductEntry.CONTENT_URI, values);
@@ -192,7 +247,8 @@ public class AddEditActivity extends AppCompatActivity
                 ProductEntry.PRODUCT_NAME,
                 ProductEntry.PRODUCT_DESCRIPTION,
                 ProductEntry.PRODUCT_QUANTITY,
-                ProductEntry.PRODUCT_PRICE
+                ProductEntry.PRODUCT_PRICE,
+                ProductEntry.PRODUCT_SUPPLIER
         };
         return new android.content.CursorLoader(
                 this,
@@ -213,18 +269,42 @@ public class AddEditActivity extends AppCompatActivity
             int descriptionColumnIndex = cursor.getColumnIndex(ProductEntry.PRODUCT_DESCRIPTION);
             int priceColumnIndex = cursor.getColumnIndex(ProductEntry.PRODUCT_PRICE);
             int quantityColumnIndex = cursor.getColumnIndex(ProductEntry.PRODUCT_QUANTITY);
+            int supplierColumnIndex = cursor.getColumnIndex(ProductEntry.PRODUCT_SUPPLIER);
 
             String name = cursor.getString(nameColumnIndex);
             String description = cursor.getString(descriptionColumnIndex);
             int price = cursor.getInt(priceColumnIndex);
             int quantity = cursor.getInt(quantityColumnIndex);
+            int supplierNumber = cursor.getInt(supplierColumnIndex);
 
             mNameEditText.setText(name);
             mDescriptionEditText.setText(description);
             mPriceEditText.setText(Integer.toString(price));
             mQuantityEditText.setText(Integer.toString(quantity));
+            //Supplier spinner switch statement
+            switch (supplierNumber){
+                case ProductEntry.COFFEE_HUT:
+                    mSupplierSpinner.setSelection(1);
+                    mSupplierDetails.setText(R.string.coffee_hut_details);
+                    break;
+                case ProductEntry.BEAN_BARN:
+                    mSupplierSpinner.setSelection(2);
+                    mSupplierDetails.setText(R.string.bean_barn_details);
+                    break;
+                case ProductEntry.FARM_DIRECT:
+                    mSupplierSpinner.setSelection(3);
+                    mSupplierDetails.setText(R.string.farm_direct_details);
+                    break;
+                default:
+                    mSupplierSpinner.setSelection(0);
+                    mSupplierDetails.setText(R.string.no_supplier);
+                    break;
+            }
+
         }
     }
+
+
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {

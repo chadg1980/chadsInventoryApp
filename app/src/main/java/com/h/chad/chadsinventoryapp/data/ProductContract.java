@@ -48,17 +48,19 @@ public class ProductContract {
         //quantity available    TYPE: INTEGER
         public final static String PRODUCT_QUANTITY = "quantity";
         /* suppliers Possiblilites are
-         * 1: Wholesale coffee hut
+         * 0: N0 Supplier
+         * 1: Wholesale Coffee Hut
          * 2: Bean Barn
-         * 3: South America Farmer
+         * 3: Directly From the Farm
          * TYPE: INTEGER
          */
         public final static String PRODUCT_SUPPLIER = "supplier";
 
         //Suppliers possible value
-        public static final int COFFEE_HUT = 0;
-        public static final int BEAN_BARN = 1;
-        public static final int SOUTH_AMERICA_FARMER = 2;
+        public static final int NO_SUPPLIER = 0;
+        public static final int COFFEE_HUT = 1;
+        public static final int BEAN_BARN = 2;
+        public static final int FARM_DIRECT = 3;
 
         //Return values for getType in ProductProvider
         public static final String CONTENT_LIST_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE +

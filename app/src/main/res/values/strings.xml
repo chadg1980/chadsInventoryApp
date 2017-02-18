@@ -12,4 +12,33 @@
     <string name="list_quantity_label">QTY:</string>
     <string name="list_price_label">Price:</string>
     <string name="list_sale_button_label">Sale</string>
+    <string name="shipment_button">Shipment Received</string>
+    <string name="order_label">Order more from the supplier</string>
+    <string name="supplier_button">Order</string>
+    <string name="supplier_details_label">Supplier Details</string>
+    <string name="add_edit_supplier">Supplier:</string>
+    <!-- Spinner Options char limit 20 -->
+    <string name="no_supplier">No Supplier</string>
+    <string name="coffee_hut">Coffee Hut</string>
+    <string name="bean_barn">Bean Barn</string>
+    <string name="farm_direct">Farm Direct</string>
+    <!-- Details for each supplier -->
+
+    <string name="coffee_hut_details">"The Coffee Hut
+    Phone: (425) 425-4254
+    Email: contact@CoffeeHut.com
+    Address: 1204 SW Keen RD
+    Texarcana, TX 12345"</string>
+    <string name="bean_barn_details">"Bean Barn
+    Phone: (555)555-1212
+    Email: orderBeans@beanbarn.org
+    Address: 25025 SE Ridder Rd
+    Kennewick, WA 99336"</string>
+    <string name="farm_direct_details">"Farm Direct
+        Phone: (123)324-1212
+        Email: unknown
+        Address: 123 S dirt RD
+        City, State, 00000
+        Brazil
+    </string>
 </resources>

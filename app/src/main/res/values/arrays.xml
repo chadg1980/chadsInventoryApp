@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Items that are in the Supplier Drop down Spinner -->
+    <string-array name="supplier_options">
+        <item>@string/no_supplier</item>
+        <item>@string/coffee_hut</item>
+        <item>@string/bean_barn</item>
+        <item>@string/farm_direct</item>
+    </string-array>
+
+</resources>
