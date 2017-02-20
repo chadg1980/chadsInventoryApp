@@ -68,15 +68,25 @@
             android:layout_weight="1"
             android:text="@string/product_price_label" />
 
+            <TextView
+                android:textColor="@color/textWhite"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$"
+                android:layout_marginRight="-2dp"
+                />
+
         <EditText
             android:id="@+id/edit_text_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="price"
+            android:hint="99.99"
             android:inputType="numberDecimal"
             android:textColor="@color/textWhite"
             android:textColorHint="@color/textWhite" />
+
     </LinearLayout>
     <!-- Current Quantity -->
     <LinearLayout
@@ -136,6 +146,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/list_sale_button_label"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             />
 
         <Button
@@ -144,6 +156,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/shipment_button"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             />
     </LinearLayout>
 
@@ -165,6 +179,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/supplier_button"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="10dp"
             />
     </LinearLayout>
 
@@ -189,5 +205,29 @@
             android:layout_weight="2"
             />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/addPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add a photograph"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:layout_margin="25dp"
+            android:id="@+id/productImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           />
+    </RelativeLayout>
 
 </LinearLayout>

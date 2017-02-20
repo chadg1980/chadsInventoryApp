@@ -28,6 +28,7 @@ public class ProductContract {
      *   -quantity      INTEGER
      *   -photo         BLOB
      *   -supplier      INTEGER
+     *   -supplier_email TEXT
      */
     public final static class ProductEntry implements BaseColumns{
 
@@ -55,6 +56,7 @@ public class ProductContract {
          * TYPE: INTEGER
          */
         public final static String PRODUCT_SUPPLIER = "supplier";
+        public final static String PRODUCT_SUPPLIER_EMAIL = "supplieremail";
 
         //Suppliers possible value
         public static final int NO_SUPPLIER = 0;

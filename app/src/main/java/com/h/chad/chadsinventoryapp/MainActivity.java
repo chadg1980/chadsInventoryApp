@@ -26,13 +26,11 @@ import java.util.List;
 import static android.R.attr.id;
 import static com.h.chad.chadsinventoryapp.R.id.fab;
 
-
 public class MainActivity extends AppCompatActivity
     implements LoaderManager.LoaderCallbacks<Cursor>{
     private static final String LOG_TAG = MainActivity.class.getName();
     private static final int URL_LOADER = 0;
     private ProductCursorAdapter mProductCursorAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +48,7 @@ public class MainActivity extends AppCompatActivity
         });
         //find the listview to be populated
         ListView lvProducts = (ListView)findViewById(R.id.list_products);
-
-
-
+        lvProducts.setEmptyView(findViewById(R.id.empty));
         //Setup the adapter to create a list for each row
         //of the Inventory Database, Products table
         mProductCursorAdapter = new ProductCursorAdapter(this, null);

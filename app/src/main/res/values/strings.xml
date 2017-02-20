@@ -17,11 +17,17 @@
     <string name="supplier_button">Order</string>
     <string name="supplier_details_label">Supplier Details</string>
     <string name="add_edit_supplier">Supplier:</string>
+    <string name="nothing_to_sell">No Inventory to Sell</string>
+
     <!-- Spinner Options char limit 20 -->
     <string name="no_supplier">No Supplier</string>
     <string name="coffee_hut">Coffee Hut</string>
     <string name="bean_barn">Bean Barn</string>
     <string name="farm_direct">Farm Direct</string>
+    <!-- email for each supplier -->
+    <string name="coffee_hut_email">contact@coffeehut.com</string>
+    <string name="bean_barn_email">orderBeans@beanbarn.org</string>
+    <string name="farm_direct_email">directorder@thefarm.com</string>
     <!-- Details for each supplier -->
 
     <string name="coffee_hut_details">"The Coffee Hut
@@ -36,9 +42,15 @@
     Kennewick, WA 99336"</string>
     <string name="farm_direct_details">"Farm Direct
         Phone: (123)324-1212
-        Email: unknown
+        Email: directorder@thefarm.com
         Address: 123 S dirt RD
         City, State, 00000
         Brazil
     </string>
+
+    <string name="empty_instructions">To get started adding products,
+        press the floating action button. From there add a product name, description, price,
+    quantity, and select a supplier.</string>
+    <string name="add_manually">new product, add quantity manually</string>
+
 </resources>

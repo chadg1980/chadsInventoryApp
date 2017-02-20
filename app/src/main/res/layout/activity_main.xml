@@ -11,6 +11,24 @@
         android:id="@+id/list_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    <!-- empty inventory Instruction -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+        <TextView
+            android:id="@+id/empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="@string/empty_instructions"
+            style="@style/headers"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            />
+
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"

@@ -123,10 +123,9 @@ public class ProductProvider extends ContentProvider{
         String description = values.getAsString(ProductEntry.PRODUCT_DESCRIPTION);
         if(description == null)
             throw  new IllegalArgumentException("description is null");
-        //No check for unit price, the db will default with $99,999.99
         Integer unitPrice = values.getAsInteger(ProductEntry.PRODUCT_PRICE);
-        Integer inStock = values.getAsInteger(ProductEntry.PRODUCT_QUANTITY);
-        if(inStock == null || inStock <0 )
+        Integer quantiryInStock = values.getAsInteger(ProductEntry.PRODUCT_QUANTITY);
+        if(quantiryInStock == null || quantiryInStock <0 )
             throw  new IllegalArgumentException("inStock is null");
 
         SQLiteDatabase db = mDbHelper.getWritableDatabase();

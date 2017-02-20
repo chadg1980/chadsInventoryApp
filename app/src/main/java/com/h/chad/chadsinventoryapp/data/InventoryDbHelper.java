@@ -7,7 +7,7 @@ import com.h.chad.chadsinventoryapp.data.ProductContract.ProductEntry;
 
 /**
  * Created by chad on 2/14/2017.
- * Database: chadsCoffee.db
+ * Database: wholeBean.db
  * Table: products
  *   -_ID       INTEGER
  *   -name      TEXT
@@ -16,13 +16,14 @@ import com.h.chad.chadsinventoryapp.data.ProductContract.ProductEntry;
  *   -quantity  INTEGER
  *   -photo     BLOB
  *   -supplier  INTEGER
+ *   -supplier_email TEXT
  */
 
 public class InventoryDbHelper extends SQLiteOpenHelper {
 
     private final static String LOG_TAG = InventoryDbHelper.class.getName();
     //Name of the database file
-    private final static String DATABASE_NAME = "chadsCoffee.db";
+    private final static String DATABASE_NAME = "wholeBean.db";
     //Database version
     private final static int DATABASE_VERSION = 1;
     /**
@@ -41,19 +42,21 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
      *   -quantity      INTEGER
      *   -photo         BLOB
      *   -supplier      INTEGER
+     *   -supplier_email TEXT
      * */
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Create a String that contains the SQL statement to create the pet table
         String SQL_CREATE_PRODUCTS_TABLE =
-                "CREATE TABLE " + ProductEntry.TABLE_NAME +"( "          +
+                "CREATE TABLE " + ProductEntry.TABLE_NAME +"( "           +
                 ProductEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 ProductEntry.PRODUCT_NAME + " TEXT NOT NULL, "            +
                 ProductEntry.PRODUCT_DESCRIPTION +" TEXT, "               +
-                ProductEntry.PRODUCT_PRICE + " INTEGER NOT NULL DEFAULT 9999999, "        +
+                ProductEntry.PRODUCT_PRICE + " INTEGER NOT NULL, "        +
                 ProductEntry.PRODUCT_QUANTITY +" INTEGER NOT NULL, "      +
                 ProductEntry.PRODUCT_PHOTO + " BLOB, "                    +
-                ProductEntry.PRODUCT_SUPPLIER + " INTEGER);";
+                ProductEntry.PRODUCT_SUPPLIER + " INTEGER, "              +
+                ProductEntry.PRODUCT_SUPPLIER_EMAIL + " TEXT );";
         db.execSQL(SQL_CREATE_PRODUCTS_TABLE);
     }
     @Override

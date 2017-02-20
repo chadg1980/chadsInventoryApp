@@ -20,6 +20,7 @@ import com.h.chad.chadsinventoryapp.data.ProductContract.ProductEntry;
 import org.w3c.dom.Text;
 
 import static android.R.attr.name;
+import static com.h.chad.chadsinventoryapp.R.id.price;
 
 /**
  * Created by chad on 2/15/2017.
@@ -39,14 +40,11 @@ public class ProductCursorAdapter extends CursorAdapter {
     //Bind View
     @Override
     public void bindView(View view, final Context context, final Cursor cursor) {
-
-
-
         //get the textviews from the list_item
         TextView tvName = (TextView) view.findViewById(R.id.productName);
         TextView tvDescription = (TextView) view.findViewById(R.id.productDesctiption);
         TextView tvQuantity = (TextView) view.findViewById(R.id.quantity);
-        TextView tvPrice = (TextView)view.findViewById(R.id.price);
+        TextView tvPrice = (TextView)view.findViewById(price);
 
         //get the column index for each item
         int idColumnIndex = cursor.getColumnIndex(ProductEntry._ID);
@@ -66,7 +64,11 @@ public class ProductCursorAdapter extends CursorAdapter {
         tvName.setText(nameString);
         tvDescription.setText(descriptionString);
         tvQuantity.setText(Integer.toString(quantityInt));
-        tvPrice.setText(Integer.toString(saleInt));
+
+        java.math.BigDecimal formattedPrice = new java.math.BigDecimal(saleInt).movePointLeft(2);
+        String paymentString = formattedPrice.toString();
+
+        tvPrice.setText("$" + paymentString);
 
         final Button button = (Button) view.findViewById(R.id.saleButton);
         button.setOnClickListener(new View.OnClickListener() {
@@ -76,10 +78,8 @@ public class ProductCursorAdapter extends CursorAdapter {
                 ContentValues values = new ContentValues();
                 Uri currentProductUri =
                         ContentUris.withAppendedId(ProductEntry.CONTENT_URI, id);
-
                 if(quantityInt <= 0){
-                    Log.i("Nothing to sell", "Quantity " + Integer.toString(quantityInt));
-
+                   Toast.makeText(context, R.string.nothing_to_sell, Toast.LENGTH_SHORT).show();
                 }else{
                     values.put(ProductEntry.PRODUCT_QUANTITY, quantityInt-1);
                     context.getContentResolver().update(
