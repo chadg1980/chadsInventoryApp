@@ -81,13 +81,13 @@ public class AddEditActivity extends AppCompatActivity
 
     private final static String LOG_TAG = AddEditActivity.class.getName();
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int EXISTING_PRODUCT_LOADER = 0;
     private EditText mNameEditText;
     private EditText mDescriptionEditText;
     private EditText mPriceEditText;
     private EditText mQuantityEditText;
     private Uri mCurrentProductUri;
     private Spinner mSupplierSpinner;
-    private static final int EXISTING_PRODUCT_LOADER = 0;
     private int mSupplier = ProductEntry.NO_SUPPLIER;
     private TextView mSupplierDetails;
     private String mSupplierEmailAddress;
@@ -99,12 +99,6 @@ public class AddEditActivity extends AppCompatActivity
     private boolean mHasImage;
     private Button mDetailSale;
     private Button mDetailShipment;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,17 +132,12 @@ public class AddEditActivity extends AppCompatActivity
         mProductImage = (ImageView) findViewById(R.id.productImage);
         mBitmapForDatabase = null;
         mHasImage = false;
-
-
         setupSpinner();
         takePicture();
         orderProductButton();
         madeASale();
         shipmentReceived();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
@@ -360,17 +349,17 @@ public class AddEditActivity extends AppCompatActivity
         //product doesn't get sold for no money
         if (TextUtils.isEmpty(priceString)) {
             values.put(ProductEntry.PRODUCT_PRICE, 9999999);
-        }else if(priceString.contains(".")){
+        } else if (priceString.contains(".")) {
             String[] formatPrice = priceString.split("\\.", -1);
-            if(TextUtils.isEmpty(formatPrice[0])){
+            if (TextUtils.isEmpty(formatPrice[0])) {
                 Log.v(LOG_TAG, "decimal, but no dollars");
-            }else {
+            } else {
                 dollars = 100 * Integer.parseInt(formatPrice[0]);
             }
 
-            if(TextUtils.isEmpty(formatPrice[1])){
+            if (TextUtils.isEmpty(formatPrice[1])) {
                 Log.v(LOG_TAG, "decimal, but no cents");
-            }else {
+            } else {
                 cents = Integer.parseInt(formatPrice[1]);
                 if (formatPrice[1].length() == 1) {
                     cents *= 10;
@@ -379,7 +368,7 @@ public class AddEditActivity extends AppCompatActivity
 
             dollars = cents + dollars;
             values.put(ProductEntry.PRODUCT_PRICE, dollars);
-        }else{
+        } else {
             values.put(ProductEntry.PRODUCT_PRICE, Integer.parseInt(priceString));
         }
 
@@ -393,7 +382,6 @@ public class AddEditActivity extends AppCompatActivity
         mSupplierEmailAddress = getSupplierEmail(mSupplier);
         values.put(ProductEntry.PRODUCT_NAME, nameString);
         values.put(ProductEntry.PRODUCT_DESCRIPTION, descriptionString);
-
 
 
         values.put(ProductEntry.PRODUCT_SUPPLIER_EMAIL, mSupplierEmailAddress);
@@ -561,10 +549,7 @@ public class AddEditActivity extends AppCompatActivity
 
     //Take a picture
     private void dispatchTakePictureIntent() {
-
-
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        Log.e(LOG_TAG, "Take picture output URI ");
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
@@ -573,7 +558,6 @@ public class AddEditActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Log.e(LOG_TAG, "Camera saved");
             Bundle extras = data.getExtras();
             mBitmapForDatabase = (Bitmap) extras.get("data");
             mHasImage = true;
@@ -582,39 +566,4 @@ public class AddEditActivity extends AppCompatActivity
     }
 
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    public Action getIndexApiAction() {
-        Thing object = new Thing.Builder()
-                .setName("AddEdit Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
-                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
-                .build();
-        return new Action.Builder(Action.TYPE_VIEW)
-                .setObject(object)
-                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
-                .build();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-        client.disconnect();
-    }
 }

@@ -23,11 +23,12 @@ import com.h.chad.chadsinventoryapp.data.ProductContract;
 import com.h.chad.chadsinventoryapp.data.ProductContract.ProductEntry;
 
 import java.util.List;
+
 import static android.R.attr.id;
 import static com.h.chad.chadsinventoryapp.R.id.fab;
 
 public class MainActivity extends AppCompatActivity
-    implements LoaderManager.LoaderCallbacks<Cursor>{
+        implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final String LOG_TAG = MainActivity.class.getName();
     private static final int URL_LOADER = 0;
     private ProductCursorAdapter mProductCursorAdapter;
@@ -39,15 +40,15 @@ public class MainActivity extends AppCompatActivity
 
         //Setup up the FAB
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener(){
-           @Override
-            public void onClick(View v){
-               Intent intent = new Intent(MainActivity.this, AddEditActivity.class);
-               startActivity(intent);
-           }
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddEditActivity.class);
+                startActivity(intent);
+            }
         });
         //find the listview to be populated
-        ListView lvProducts = (ListView)findViewById(R.id.list_products);
+        ListView lvProducts = (ListView) findViewById(R.id.list_products);
         lvProducts.setEmptyView(findViewById(R.id.empty));
         //Setup the adapter to create a list for each row
         //of the Inventory Database, Products table
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity
         lvProducts.setAdapter(mProductCursorAdapter);
 
         //click listener for each item to open up the AddEditActivity
-        lvProducts.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        lvProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long thisId) {
                 Intent intent = new Intent(MainActivity.this, AddEditActivity.class);
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         Uri baseUri = ProductEntry.CONTENT_URI;
-        String [] projection = {
+        String[] projection = {
                 ProductEntry._ID,
                 ProductEntry.PRODUCT_NAME,
                 ProductEntry.PRODUCT_DESCRIPTION,

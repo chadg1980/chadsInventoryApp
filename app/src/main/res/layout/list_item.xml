@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
-        android:paddingRight="10dp"
         android:focusable="false"
+        android:paddingRight="10dp"
         android:text="@string/list_sale_button_label" />
 </RelativeLayout>
