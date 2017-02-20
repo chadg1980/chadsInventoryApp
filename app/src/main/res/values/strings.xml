@@ -18,6 +18,10 @@
     <string name="supplier_details_label">Supplier Details</string>
     <string name="add_edit_supplier">Supplier:</string>
     <string name="nothing_to_sell">No Inventory to Sell</string>
+    <string name="name_required">Name Required</string>
+    <string name="price_required">Price Required</string>
+    <string name="quantity_required">Quantity Required</string>
+    <string name="photo_required">Photograph Required</string>
 
     <!-- Spinner Options char limit 20 -->
     <string name="no_supplier">No Supplier</string>

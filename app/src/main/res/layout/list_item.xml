@@ -11,9 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:paddingLeft="10dp"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-
-        />
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
 
     <!-- Description of the product -->
     <TextView

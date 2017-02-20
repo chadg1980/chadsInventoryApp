@@ -1,228 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical">
-
-
-    <!-- product Name -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/AddProductLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/product_name_label" />
-
-        <EditText
-            android:id="@+id/edit_text_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Name"
-            android:textColor="@color/textWhite"
-            android:textColorHint="@color/textWhite" />
-        <!-- product Description -->
-    </LinearLayout>
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/AddProductLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:minLines="2"
-            android:text="@string/product_description_label" />
-
-        <EditText
-            android:id="@+id/edit_text_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="descrition"
-            android:inputType="text"
-            android:maxLines="3"
-            android:minLines="2"
-            android:textColor="@color/textWhite"
-            android:textColorHint="@color/textWhite" />
-    </LinearLayout>
-    <!-- price -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/AddProductLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/product_price_label" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="-2dp"
-            android:text="$"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textColor="@color/textWhite" />
-
-        <EditText
-            android:id="@+id/edit_text_price"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="99.99"
-            android:inputType="numberDecimal"
-            android:textColor="@color/textWhite"
-            android:textColorHint="@color/textWhite" />
-
-    </LinearLayout>
-    <!-- Current Quantity -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/AddProductLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/product_quantiry_label" />
-
-        <EditText
-            android:id="@+id/edit_text_quantity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="0"
-            android:inputType="number"
-            android:textColor="@color/textWhite"
-            android:textColorHint="@color/textWhite" />
-    </LinearLayout>
-    <!-- Select a Supplier -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/AddProductLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/add_edit_supplier" />
-
-        <Spinner
-            android:id="@+id/edit_supplier_spinner"
-            style="@style/spinnerStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:spinnerMode="dropdown" />
-    </LinearLayout>
-
-    <!-- Sale or shipment button -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/detail_sale"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:text="@string/list_sale_button_label" />
-
-        <Button
-            android:id="@+id/detail_shipment"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:text="@string/shipment_button" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/AddProductLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/order_label" />
-
-        <Button
-            android:id="@+id/order_from_supplier"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:text="@string/supplier_button" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="20dp">
-
-        <TextView
-            style="@style/AddProductLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/supplier_details_label" />
-
-        <TextView
-            android:id="@+id/supplier_details"
-            style="@style/AddProductLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="5dp">
-
-        <Button
-            android:id="@+id/addPhoto"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!-- product Name -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add a photograph" />
-    </LinearLayout>
+            android:orientation="horizontal">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+            <TextView
+                style="@style/AddProductLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/product_name_label" />
 
-        <ImageView
-            android:id="@+id/productImage"
-            android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/edit_text_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Name"
+                android:textColor="@color/textWhite"
+                android:textColorHint="@color/textWhite" />
+
+        </LinearLayout>
+        <!-- product Description -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="25dp" />
-    </RelativeLayout>
+            android:orientation="horizontal">
 
-</LinearLayout>
+            <TextView
+                style="@style/AddProductLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minLines="2"
+                android:text="@string/product_description_label" />
+
+            <EditText
+                android:id="@+id/edit_text_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="descrition"
+                android:inputType="text"
+                android:maxLines="3"
+                android:minLines="2"
+                android:textColor="@color/textWhite"
+                android:textColorHint="@color/textWhite" />
+        </LinearLayout>
+        <!-- Product Price -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AddProductLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/product_price_label" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="-2dp"
+                android:text="$"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/textWhite" />
+
+            <EditText
+                android:id="@+id/edit_text_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="99.99"
+                android:inputType="numberDecimal"
+                android:textColor="@color/textWhite"
+                android:textColorHint="@color/textWhite" />
+
+        </LinearLayout>
+        <!-- Current Quantity -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AddProductLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/product_quantiry_label" />
+
+            <EditText
+                android:id="@+id/edit_text_quantity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="0"
+                android:inputType="number"
+                android:textColor="@color/textWhite"
+                android:textColorHint="@color/textWhite" />
+        </LinearLayout>
+        <!-- Select a Supplier -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AddProductLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/add_edit_supplier" />
+
+            <Spinner
+                android:id="@+id/edit_supplier_spinner"
+                style="@style/spinnerStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+        <!-- Sale and shipment button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/detail_sale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:text="@string/list_sale_button_label" />
+
+            <Button
+                android:id="@+id/detail_shipment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:text="@string/shipment_button" />
+        </LinearLayout>
+        <!-- Order Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AddProductLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/order_label" />
+
+            <Button
+                android:id="@+id/order_from_supplier"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:text="@string/supplier_button" />
+        </LinearLayout>
+        <!-- Supplier Details -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="20dp">
+
+            <TextView
+                style="@style/AddProductLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/supplier_details_label" />
+
+            <TextView
+                android:id="@+id/supplier_details"
+                style="@style/AddProductLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="5dp">
+
+            <Button
+                android:id="@+id/addPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add a photograph" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/productImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>

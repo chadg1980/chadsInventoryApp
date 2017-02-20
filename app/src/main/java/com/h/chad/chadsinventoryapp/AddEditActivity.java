@@ -59,6 +59,7 @@ import java.util.Locale;
 import static android.R.attr.bitmap;
 import static android.R.attr.button;
 import static android.R.attr.dial;
+import static android.R.attr.duration;
 import static android.R.attr.id;
 import static android.R.attr.name;
 import static android.R.attr.onClick;
@@ -270,7 +271,6 @@ public class AddEditActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.save:
                 saveProducts();
-                finish();
                 break;
             case R.id.delete:
                 confirmDelete();
@@ -332,23 +332,30 @@ public class AddEditActivity extends AppCompatActivity
 
     private void saveProducts() {
         ContentValues values = new ContentValues();
-
-        //read from input fields
-        String nameString = mNameEditText.getText().toString().trim();
-        if (TextUtils.isEmpty(nameString)) {
-            Log.e(LOG_TAG, "NO NAME");
-            return;
-        }
-        String descriptionString = mDescriptionEditText.getText().toString().trim();
-
-        String priceString = mPriceEditText.getText().toString().trim();
-
+        //Context and duration are for all the toast messages in this method
+        Context c = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        //dollars and cents are for the price to be split at the decimal
+        //and stored as a non-floating point number
         int dollars = 0;
         int cents = 0;
-        //If no price is entered, a very high price is a placeholder so the
-        //product doesn't get sold for no money
+
+
+        //read name from edit text
+        String nameString = mNameEditText.getText().toString().trim();
+        if (TextUtils.isEmpty(nameString)) {
+            Toast.makeText(this, getString(R.string.name_required), duration).show();
+            return;
+        }
+        //read description from text. No validation, not required
+        String descriptionString = mDescriptionEditText.getText().toString().trim();
+
+        //Read price from Edit Text, validate, and make into a non floating point number.
+        String priceString = mPriceEditText.getText().toString().trim();
         if (TextUtils.isEmpty(priceString)) {
-            values.put(ProductEntry.PRODUCT_PRICE, 9999999);
+            Toast.makeText(c, getString(R.string.price_required), duration).show();
+            return;
+            //If a decimal point is present, split the string and add each part seperatly.
         } else if (priceString.contains(".")) {
             String[] formatPrice = priceString.split("\\.", -1);
             if (TextUtils.isEmpty(formatPrice[0])) {
@@ -365,16 +372,18 @@ public class AddEditActivity extends AppCompatActivity
                     cents *= 10;
                 }
             }
-
             dollars = cents + dollars;
             values.put(ProductEntry.PRODUCT_PRICE, dollars);
+            //If no decimal is present, add the price as is
         } else {
             values.put(ProductEntry.PRODUCT_PRICE, Integer.parseInt(priceString));
         }
 
+        //read quantity from edittext
         String quantityString = mQuantityEditText.getText().toString().trim();
         if (TextUtils.isEmpty(quantityString) || Integer.parseInt(quantityString) < 0) {
-            values.put(ProductEntry.PRODUCT_QUANTITY, 0);
+            Toast.makeText(c, getString(R.string.quantity_required), duration).show();
+            return;
         } else {
             values.put(ProductEntry.PRODUCT_QUANTITY, quantityString);
         }
@@ -382,15 +391,16 @@ public class AddEditActivity extends AppCompatActivity
         mSupplierEmailAddress = getSupplierEmail(mSupplier);
         values.put(ProductEntry.PRODUCT_NAME, nameString);
         values.put(ProductEntry.PRODUCT_DESCRIPTION, descriptionString);
-
-
         values.put(ProductEntry.PRODUCT_SUPPLIER_EMAIL, mSupplierEmailAddress);
         values.put(ProductEntry.PRODUCT_SUPPLIER, mSupplier);
 
         if (mHasImage) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            mBitmapForDatabase.compress(Bitmap.CompressFormat.JPEG, 0, stream);
+            mBitmapForDatabase.compress(Bitmap.CompressFormat.JPEG, 50, stream);
             values.put(ProductEntry.PRODUCT_PHOTO, stream.toByteArray());
+        } else {
+            Toast.makeText(this, getString(R.string.photo_required), duration).show();
+            return;
         }
 
         //if mCurrentProductUri is null, we are adding a new product
@@ -412,6 +422,7 @@ public class AddEditActivity extends AppCompatActivity
                 Toast.makeText(this, "success updating product", Toast.LENGTH_SHORT).show();
             }
         }
+        finish();
     }
 
     //getSupplierEmail chooses the appropriate email for the supplier selected in the spinner
@@ -497,16 +508,13 @@ public class AddEditActivity extends AppCompatActivity
             long price = cursor.getLong(priceColumnIndex);
             java.math.BigDecimal formattedPrice = new java.math.BigDecimal(price).movePointLeft(2);
             String paymentString = formattedPrice.toString();
-
             int quantity = cursor.getInt(quantityColumnIndex);
-
             int supplierNumber = cursor.getInt(supplierColumnIndex);
             byte[] productPhoto = cursor.getBlob(productPhotoColumnIndex);
             if (productPhoto != null) {
                 mHasImage = true;
                 mBitmapForDatabase = BitmapFactory.decodeByteArray(productPhoto, 0, productPhoto.length);
             }
-
             mProductImage.setImageBitmap(mBitmapForDatabase);
             mNameEditText.setText(name);
             mDescriptionEditText.setText(description);
@@ -564,6 +572,4 @@ public class AddEditActivity extends AppCompatActivity
             mProductImage.setImageBitmap(mBitmapForDatabase);
         }
     }
-
-
 }
