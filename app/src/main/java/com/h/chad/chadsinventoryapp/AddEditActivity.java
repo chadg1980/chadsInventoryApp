@@ -120,7 +120,7 @@ public class AddEditActivity extends AppCompatActivity
             mDetailShipment.setEnabled(false);
         } else {
             setTitle("Edit product");
-            getLoaderManager().initLoader(EXISTING_PRODUCT_LOADER, null, this);
+            getLoaderManager().initLoader(EXISTING_PRODUCT_LOADER, null,this);
         }
 
         mPriceEditText = (EditText) findViewById(R.id.edit_text_price);

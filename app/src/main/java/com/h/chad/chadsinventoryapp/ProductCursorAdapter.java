@@ -66,9 +66,9 @@ public class ProductCursorAdapter extends CursorAdapter {
         tvQuantity.setText(Integer.toString(quantityInt));
 
         java.math.BigDecimal formattedPrice = new java.math.BigDecimal(saleInt).movePointLeft(2);
-        String paymentString = formattedPrice.toString();
+        String paymentString = "$" +formattedPrice.toString();
 
-        tvPrice.setText("$" + paymentString);
+        tvPrice.setText(paymentString);
 
         final Button button = (Button) view.findViewById(R.id.saleButton);
         button.setOnClickListener(new View.OnClickListener() {
@@ -88,5 +88,4 @@ public class ProductCursorAdapter extends CursorAdapter {
             }
         });
     }
-
 }
